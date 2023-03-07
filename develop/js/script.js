@@ -1,10 +1,5 @@
 
 //  Quiz Settings  //
-
-let currentQuestionIndex;
-let timeLeft;
-let score;
-
 const quizSettings = {
     duration: 75,
     penalty: 10,
@@ -36,18 +31,79 @@ const quizSettings = {
         }
     ]
         };
+let currentQuestionIndex;
+let timeleft;
+let score;
+
 var startButton = document.querySelector('#start-button')
-
 startButton.addEventListener("click", startQuiz)
+const choicesContainer = document.getElementById("choices");
+const questionText = document.getElementById("question-text")
 
-
-
+// Start Quiz
 
 function startQuiz () {
-    currentQuestionIndex = 0;
-    timeLeft = quizSettings.duration;
-    score = 0;
     var main = document.getElementById("main").style.visibility = "Visible"
     var titlePage = document.getElementById("quiz-intro").style.visibility = "hidden"
     var questionsScreen = document.getElementById("question-screen").style.visibility = "visible"
+    currentQuestionIndex = 0;
+    timeLeft = quizSettings.duration;
+    score = 0;
+
+
+// Start Timer
+const timerInterval = setInterval(() => {
+    timeLeft--;
+    if (timeLeft <= 0) {
+      endQuiz();
+      clearInterval(timerInterval);
+    }
+  }, 1000);
+document.getElementById("timer").innerHTML = 'Time Left: ' + timerInterval + ' seconds '
+
+  // Display the first question
+  
+  displayQuestion();
 }
+function displayQuestion() {
+  
+  const currentQuestion = quizSettings.questions[currentQuestionIndex];
+
+  questionText.textContent = currentQuestion.text;
+  choicesContainer.innerHTML = "";
+  currentQuestion.choices.forEach(choice => {
+    const choiceButton = document.createElement("button");
+    choiceButton.textContent = choice;
+    choiceButton.addEventListener("click", () => {
+      checkAnswer(choice, currentQuestion.answer);
+    });
+    choicesContainer.appendChild(choiceButton);
+  });
+}
+// Display a question
+
+
+
+// Check the Answer
+
+function checkAnswer(answer) {
+    if (answer === quizSettings.questions[currentQuestionIndex].answer) {
+       // Answer is correct
+    score += 10;
+    
+  } else {
+        // Answer is incorrect
+      timeLeft -= 10;
+    }
+  
+    // Move on to the next question or end the quiz
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex === currentQuestionIndex.length) {
+      endQuiz();
+    } else {
+      displayQuestion();
+    }
+  }
+
+  // End the quiz
