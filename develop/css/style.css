@@ -52,7 +52,7 @@ li {
 /* top bar container */
 /* ----------------- */
 
-.top-bar p {
+.top-bar #timer {
     float: right;
 }
 
