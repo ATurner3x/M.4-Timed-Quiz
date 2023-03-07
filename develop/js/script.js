@@ -112,28 +112,10 @@ function checkAnswer(answer) {
   function endQuiz() {
     // Stop the timer
     // clearInterval(timerInterval);
-    // Show the final score and hide the quiz content
+    
     var questionsScreen = document.getElementById("question-screen").style.visibility = "hidden";
+    var finishScreen = document.getElementById("quiz-finish-screen").style.visibility = "visible";
     document.getElementById("score").innerHTML = 'Your Score: ' + score
-    var finishScreen = document.getElementById("quiz-finish-screen").style.visibility = "visible"
+    
   }
 
-  // Submission
-// Define event listener for when the user submits their score
-submitBtn = document.getElementById("submit");
-const initialsInput = document.getElementById("initials");
-submitBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  // Get the user's initials and score
-  var initials = initialsInput.value.trim();
-  if (initials !== "") {
-    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-    highScores.push({
-      initials: initials,
-      score: userScore,
-    });
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-    // Redirect to high scores page
-    window.location.href = "highscores.html";
-  }
-});
