@@ -35,17 +35,17 @@ let currentQuestionIndex;
 let timeleft;
 let score;
 
-var startButton = document.querySelector('#start-button')
-startButton.addEventListener("click", startQuiz)
+var startButton = document.querySelector('#start-button');
+startButton.addEventListener("click", startQuiz);
 const choicesContainer = document.getElementById("choices");
-const questionText = document.getElementById("question-text")
+const questionText = document.getElementById("question-text");
 
 // Start Quiz
 
 function startQuiz () {
-    var main = document.getElementById("main").style.visibility = "Visible"
-    var titlePage = document.getElementById("quiz-intro").style.visibility = "hidden"
-    var questionsScreen = document.getElementById("question-screen").style.visibility = "visible"
+    var main = document.getElementById("main").style.visibility = "Visible";
+    var titlePage = document.getElementById("quiz-intro").style.visibility = "hidden";
+    var questionsScreen = document.getElementById("question-screen").style.visibility = "visible";
     currentQuestionIndex = 0;
     timeLeft = quizSettings.duration;
     score = 0;
@@ -89,7 +89,7 @@ function displayQuestion() {
 function checkAnswer(answer) {
     if (answer === quizSettings.questions[currentQuestionIndex].answer) {
        // Answer is correct
-    score += 10;
+    score += 1;
     
   } else {
         // Answer is incorrect
@@ -99,11 +99,23 @@ function checkAnswer(answer) {
     // Move on to the next question or end the quiz
 
     currentQuestionIndex++;
-    if (currentQuestionIndex === currentQuestionIndex.length) {
+    if (currentQuestionIndex === quizSettings.questions.length) {
       endQuiz();
     } else {
       displayQuestion();
     }
   }
 
+
   // End the quiz
+
+  function endQuiz() {
+    // Stop the timer
+    // clearInterval(timerInterval);
+    
+    var questionsScreen = document.getElementById("question-screen").style.visibility = "hidden";
+    var finishScreen = document.getElementById("quiz-finish-screen").style.visibility = "visible";
+    document.getElementById("score").innerHTML = 'Your Score: ' + score
+    
+  }
+

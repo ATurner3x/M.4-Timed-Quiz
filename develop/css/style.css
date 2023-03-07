@@ -7,7 +7,7 @@
     box-sizing: border-box;
     /* border: 1px solid orange; */
     font-family: monospace;
-    color: rgb(0, 0, 0)
+    color: rgb(247, 7, 7)
 }
 
 body {
@@ -114,7 +114,7 @@ main {
 /* Finish Screen      */
 /* -----------------  */
 
-.quiz-finish-screen {
+#quiz-finish-screen {
     visibility: hidden;
 }
 
@@ -122,7 +122,7 @@ main {
 /*      Highscores    */
 /* -----------------  */
 
-.highscores-screen {
+#highscores-screen {
     visibility: hidden;
 }
 
